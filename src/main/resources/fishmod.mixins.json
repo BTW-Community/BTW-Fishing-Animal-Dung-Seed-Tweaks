@@ -6,8 +6,10 @@
   "mixins": [
     "ChickenMixin",
     "CowMixin",
+    "EntityAnimalMixin",
     "FishHookMixin",
     "HempSeedMixin",
+    "PigMixin",
     "SheepMixin",
     "WolfMixin"
   ],

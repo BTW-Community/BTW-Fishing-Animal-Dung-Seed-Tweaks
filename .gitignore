@@ -22,3 +22,4 @@ src/btw/**
 .idea/jarRepositories.xml
 /run/
 /reobfuscated/
+/.idea/

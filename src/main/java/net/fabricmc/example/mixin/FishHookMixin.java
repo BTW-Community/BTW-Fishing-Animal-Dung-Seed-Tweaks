@@ -15,6 +15,6 @@ public class FishHookMixin {
 			index = 1
 	)
 	private int modifyBiteOdds(int iBiteOdds) {
-		return 500;
+		return 400;
 	}
 }

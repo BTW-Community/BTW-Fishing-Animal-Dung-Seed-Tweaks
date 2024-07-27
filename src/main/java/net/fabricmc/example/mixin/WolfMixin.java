@@ -3,13 +3,9 @@ package net.fabricmc.example.mixin;
 import btw.client.fx.BTWEffectManager;
 import btw.entity.mob.WolfEntity;
 import btw.item.BTWItems;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.World;
+import net.minecraft.src.*;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -19,13 +15,13 @@ public abstract class WolfMixin {
 
 	@Inject(method = "isBreedingItem", at = @At("TAIL"), cancellable = true)
 	private void injectIsBreedingItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-		if (stack !=null && (stack.itemID == BTWItems.rawMysteryMeat.itemID || stack.itemID == BTWItems.cookedMysteryMeat.itemID || stack.itemID == Item.fishRaw.itemID)) {
+		if (stack !=null && (stack.itemID == BTWItems.rawMysteryMeat.itemID || stack.itemID == BTWItems.cookedMysteryMeat.itemID || stack.itemID == Item.fishRaw.itemID || stack.itemID == Item.fishCooked.itemID)) {
 			cir.setReturnValue(true);
 		}
 	}
 	@Inject(method = "isEdibleItem", at = @At("HEAD"), cancellable = true)
 	private void isEdibleItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-		if (stack.getItem() == Item.fishRaw) {
+		if (stack.getItem() == Item.fishRaw || stack.getItem() == Item.fishCooked) {
 			// Set the return value to true if the item is fishRaw
 			cir.setReturnValue(true);
 		}
@@ -35,8 +31,8 @@ public abstract class WolfMixin {
 		WolfEntity wolf = (WolfEntity) (Object) this;
 		World world = wolf.worldObj;
 
-		// Custom behavior for CreeperOysterItem
-		if (food.itemID == BTWItems.rawMysteryMeat.itemID || food.itemID == BTWItems.cookedMysteryMeat.itemID || food.itemID == Item.fishRaw.itemID) {
+		// Custom behavior for FishRaw
+		if (food.itemID == BTWItems.rawMysteryMeat.itemID || food.itemID == BTWItems.cookedMysteryMeat.itemID || food.itemID == Item.fishRaw.itemID || food.itemID == Item.fishCooked.itemID) {
 
 			wolf.heal(food.getWolfHealAmount());
 
@@ -59,5 +55,14 @@ public abstract class WolfMixin {
 			// Cancel the rest of the method execution
 			ci.cancel();
 		}
+	}
+	@ModifyConstant(method = "attemptToShit", constant = @Constant(floatValue = 0.05F), remap = false)
+	private float modifyVelocityFactor(float original) {
+		return 0.005F;
+	}
+
+	@ModifyConstant(method = "updateShitState", constant = @Constant(intValue = 24000), remap = false)
+	private int modifyShitStateInterval(int original) {
+		return 4800;
 	}
 }

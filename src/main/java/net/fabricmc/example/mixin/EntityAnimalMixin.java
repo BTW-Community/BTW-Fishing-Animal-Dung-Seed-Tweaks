@@ -1,35 +1,26 @@
 package net.fabricmc.example.mixin;
 
-import btw.entity.mob.CowEntity;
 import btw.item.BTWItems;
 import net.minecraft.src.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@Mixin(EntityAnimal.class)
+public abstract class EntityAnimalMixin extends EntityLiving {
 
-@Mixin(CowEntity.class)
-public abstract class CowMixin extends EntityCow {
-
-	public CowMixin(World world) {
+	public EntityAnimalMixin(World world) {
 		super(world);
 	}
 
 	@Inject(method = "updateHungerState", at = @At("HEAD"))
-	private void injectUpdateHungerState(CallbackInfo info) {
-		updateShitState();
-	}
-
-	@Inject(method = "isBreedingItem", at = @At("TAIL"), cancellable = true)
-	private void injectIsBreedingItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-		if (stack !=null && (stack.itemID == Item.cake.itemID || stack.itemID == BTWItems.wheat.itemID)) {
-			cir.setReturnValue(true);
+	public void injectUpdateHungerState(CallbackInfo info) {
+		if (this.getClass().getSimpleName().equals("PigEntity")) {
+			updateShitState();
 		}
 	}
-
-	private void updateShitState() {
+	public void updateShitState() {
 		if (isFullyFed()) {
 			int chanceOfShitting = 1;
 
@@ -37,14 +28,18 @@ public abstract class CowMixin extends EntityCow {
 				chanceOfShitting *= 2;
 			}
 
-			// A cow shits on average every 20 minutes if in the light
-			if (worldObj.rand.nextInt(6000) < chanceOfShitting) {
+			// A pig shits on average every 20 minutes if in the light
+			if (worldObj.rand.nextInt(4800) < chanceOfShitting) {
 				attemptToShit();
 			}
 		}
 	}
 
-	private boolean isDarkEnoughToAffectShitting() {
+	public boolean isFullyFed() {
+		return ((EntityAnimal) (Object) this).getHungerLevel() == 0;
+	}
+
+	public boolean isDarkEnoughToAffectShitting() {
 		int i = MathHelper.floor_double(posX);
 		int j = MathHelper.floor_double(posY);
 		int k = MathHelper.floor_double(posZ);
@@ -54,7 +49,7 @@ public abstract class CowMixin extends EntityCow {
 		return lightValue <= 5;
 	}
 
-	private boolean attemptToShit() {
+	public boolean attemptToShit() {
 		float poopVectorX;
 		poopVectorX = MathHelper.sin((rotationYawHead / 180F) * (float) Math.PI);
 		float poopVectorZ;
@@ -98,20 +93,20 @@ public abstract class CowMixin extends EntityCow {
 		return true;
 	}
 
-	private boolean isPathToBlockOpenToShitting(int i, int j, int k) {
+	public boolean isPathToBlockOpenToShitting(int i, int j, int k) {
 		if (!isBlockOpenToShitting(i, j, k)) {
 			return false;
 		}
 
-		int cowI = MathHelper.floor_double(posX);
-		int cowK = MathHelper.floor_double(posZ);
+		int pigI = MathHelper.floor_double(posX);
+		int pigK = MathHelper.floor_double(posZ);
 
-		int deltaI = i - cowI;
-		int deltaK = k - cowK;
+		int deltaI = i - pigI;
+		int deltaK = k - pigK;
 
 		if (deltaI != 0 && deltaK != 0) {
 			// We're pooping on a diagonal. Test to make sure that we're not warping poop through blocked off corners
-			if (!isBlockOpenToShitting(cowI, j, k) && !isBlockOpenToShitting(i, j, cowK)) {
+			if (!isBlockOpenToShitting(pigI, j, k) && !isBlockOpenToShitting(i, j, pigK)) {
 				return false;
 			}
 		}
@@ -119,7 +114,7 @@ public abstract class CowMixin extends EntityCow {
 		return true;
 	}
 
-	private boolean isBlockOpenToShitting(int i, int j, int k) {
+	public boolean isBlockOpenToShitting(int i, int j, int k) {
 		int blockId = worldObj.getBlockId(i, j, k);
 		Block block = Block.blocksList[blockId];
 
@@ -127,10 +122,6 @@ public abstract class CowMixin extends EntityCow {
 			block = null;
 		}
 
-		if (block != null) {
-			return false;
-		}
-
-		return true;
+		return block == null;
 	}
 }
