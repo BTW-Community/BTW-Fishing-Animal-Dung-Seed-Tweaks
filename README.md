@@ -1,4 +1,4 @@
-# BTW Fishing, Animal, Dung and Seed Tweaks
+# BTW Fishing, Animal and Seed Tweaks
 
 Based on BTW-Community/BTW-gradle-fabric-example
 
