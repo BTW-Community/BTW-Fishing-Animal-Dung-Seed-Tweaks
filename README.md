@@ -14,7 +14,7 @@ Modifies fishing speed, chances for hemp seeds when using hoe on grass (small ch
 
 ### Fishing
 
-    Fishing base bite chance (before weather & time modifiers) changed from 1/1500 chance per tick to 1/400 chance per tick
+    Fishing base bite chance (before modifiers) changed from 1/1500 to 1/400 chance per tick
 
 ### Seeds
 
