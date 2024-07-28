@@ -37,7 +37,6 @@ public abstract class CowMixin extends EntityCow {
 				chanceOfShitting *= 2;
 			}
 
-			// A cow shits on average every 20 minutes if in the light
 			if (worldObj.rand.nextInt(6000) < chanceOfShitting) {
 				attemptToShit();
 			}
@@ -86,7 +85,6 @@ public abstract class CowMixin extends EntityCow {
 
 		worldObj.playSoundAtEntity(this, "random.explode", 0.2F, 1.25F);
 
-		// Emit smoke
 		for (int counter = 0; counter < 5; counter++) {
 			double smokeX = posX + (poopVectorX * 0.5f) + (worldObj.rand.nextDouble() * 0.25F);
 			double smokeY = posY + worldObj.rand.nextDouble() * 0.5F + 0.25F;
@@ -110,7 +108,6 @@ public abstract class CowMixin extends EntityCow {
 		int deltaK = k - cowK;
 
 		if (deltaI != 0 && deltaK != 0) {
-			// We're pooping on a diagonal. Test to make sure that we're not warping poop through blocked off corners
 			if (!isBlockOpenToShitting(cowI, j, k) && !isBlockOpenToShitting(i, j, cowK)) {
 				return false;
 			}

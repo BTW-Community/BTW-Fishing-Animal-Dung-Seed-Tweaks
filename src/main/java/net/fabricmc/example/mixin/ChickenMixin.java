@@ -2,6 +2,7 @@ package net.fabricmc.example.mixin;
 
 import btw.entity.mob.ChickenEntity;
 import btw.item.BTWItems;
+import btw.world.util.WorldUtils;
 import net.minecraft.src.EntityChicken;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.ItemStack;
@@ -25,11 +26,11 @@ public abstract class ChickenMixin {
 		}
 	}
 
-	// Inject to set timeToLayEgg to 10 seconds after the current time
 	@Inject(method = "onEatBreedingItem", at = @At("HEAD"), cancellable = true)
 	private void modifyOnEatBreedingItem(CallbackInfo ci) {
 		ChickenEntity chicken = (ChickenEntity) (Object) this;
-		long timeToLayEgg = 4800L;
+		long lCurrentTime = WorldUtils.getOverworldTimeServerOnly();
+		long timeToLayEgg = lCurrentTime + 1200L;
 		try {
 			Method getDeathSoundMethod = EntityChicken.class.getDeclaredMethod("getDeathSound");
 			getDeathSoundMethod.setAccessible(true);
@@ -44,7 +45,6 @@ public abstract class ChickenMixin {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// Use reflection to set the protected timeToLayEgg field
 		try {
 			Field timeToLayEggField = ChickenEntity.class.getDeclaredField("timeToLayEgg");
 			timeToLayEggField.setAccessible(true);
@@ -52,8 +52,6 @@ public abstract class ChickenMixin {
 		} catch (NoSuchFieldException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-
-		// Cancel further execution of the original method
 		ci.cancel();
 	}
 }

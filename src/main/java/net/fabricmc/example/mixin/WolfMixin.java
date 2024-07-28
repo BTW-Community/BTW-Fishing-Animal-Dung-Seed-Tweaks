@@ -22,7 +22,6 @@ public abstract class WolfMixin {
 	@Inject(method = "isEdibleItem", at = @At("HEAD"), cancellable = true)
 	private void isEdibleItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
 		if (stack.getItem() == Item.fishRaw || stack.getItem() == Item.fishCooked) {
-			// Set the return value to true if the item is fishRaw
 			cir.setReturnValue(true);
 		}
 	}
@@ -31,7 +30,6 @@ public abstract class WolfMixin {
 		WolfEntity wolf = (WolfEntity) (Object) this;
 		World world = wolf.worldObj;
 
-		// Custom behavior for FishRaw
 		if (food.itemID == BTWItems.rawMysteryMeat.itemID || food.itemID == BTWItems.cookedMysteryMeat.itemID || food.itemID == Item.fishRaw.itemID || food.itemID == Item.fishCooked.itemID) {
 
 			wolf.heal(food.getWolfHealAmount());
@@ -48,11 +46,8 @@ public abstract class WolfMixin {
 						MathHelper.floor_double(wolf.posX), (int) (wolf.posY + wolf.height),
 						MathHelper.floor_double(wolf.posZ), 0);
 			}
-
-			// Trigger breeding behavior
 			wolf.onEatBreedingItem();
 
-			// Cancel the rest of the method execution
 			ci.cancel();
 		}
 	}

@@ -16,10 +16,10 @@ public class HempSeedMixin {
 	@Inject(method = "convertBlock", at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 0), cancellable = true)
 	private void injectChangeProbability(ItemStack stack, World world, int x, int y, int z, int fromSide, CallbackInfoReturnable<Boolean> cir) {
 		if (!world.isRemote) {
-			if (world.rand.nextInt(17) == 0) {  // Change the probability to 1/12
+			if (world.rand.nextInt(17) == 0) {
 				ItemUtils.ejectStackFromBlockTowardsFacing(world, x, y, z, new ItemStack(BTWItems.hempSeeds), fromSide);
 			}
-			if (world.rand.nextInt(90) == 50) { // Wheat seed probability 1/50
+			if (world.rand.nextInt(90) == 50) {
 				ItemUtils.ejectStackFromBlockTowardsFacing(world, x, y, z, new ItemStack(BTWItems.wheatSeeds), fromSide);
 
 			}
