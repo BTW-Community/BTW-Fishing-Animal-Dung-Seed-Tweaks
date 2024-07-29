@@ -3,14 +3,14 @@
   "id": "fishmod",
   "version": "${version}",
 
-  "name": "BTW Fishing and Seeds Tweak",
-  "description": "Changes fishing and seed behaviour",
+  "name": "BTW Fishing, Animal and Seed Tweaks",
+  "description": "Changes fishing speed, animal breeding foods and seed drops",
   "authors": [
     "Kied22"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/Kied22/fabric-example-mod"
+    "sources": "https://github.com/Kied22/BTW-Fishing-and-Seed-Tweaks"
   },
 
   "license": "CC0-1.0",
