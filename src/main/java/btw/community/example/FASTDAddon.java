@@ -3,11 +3,11 @@ package btw.community.example;
 import btw.AddonHandler;
 import btw.BTWAddon;
 
-public class ExampleAddon extends BTWAddon {
-    private static ExampleAddon instance;
+public class FASTDAddon extends BTWAddon {
+    private static FASTDAddon instance;
 
-    private ExampleAddon() {
-        super("BTW FASTD", "1.0.2", "FAST");
+    private FASTDAddon() {
+        super("BTW FASTD", "1.0.2", "FASTD");
     }
 
     @Override
@@ -15,9 +15,9 @@ public class ExampleAddon extends BTWAddon {
         AddonHandler.logMessage(this.getName() + " Version " + this.getVersionString() + " Initializing...");
     }
 
-    public static ExampleAddon getInstance() {
+    public static FASTDAddon getInstance() {
         if (instance == null)
-            instance = new ExampleAddon();
+            instance = new FASTDAddon();
         return instance;
     }
 }
