@@ -3,10 +3,10 @@ package btw.community.example;
 import btw.AddonHandler;
 import btw.BTWAddon;
 
-public class ExampleAddon extends BTWAddon {
-    private static ExampleAddon instance;
+public class FASTAddon extends BTWAddon {
+    private static FASTAddon instance;
 
-    private ExampleAddon() {
+    private FASTAddon() {
         super("BTW FAST", "1.0.1", "FAST");
     }
 
@@ -15,9 +15,9 @@ public class ExampleAddon extends BTWAddon {
         AddonHandler.logMessage(this.getName() + " Version " + this.getVersionString() + " Initializing...");
     }
 
-    public static ExampleAddon getInstance() {
+    public static FASTAddon getInstance() {
         if (instance == null)
-            instance = new ExampleAddon();
+            instance = new FASTAddon();
         return instance;
     }
 }
