@@ -7,7 +7,7 @@ public class FASTDAddon extends BTWAddon {
     private static FASTDAddon instance;
 
     private FASTDAddon() {
-        super("BTW FASTD", "1.0.2", "FASTD");
+        super("BTW FASTD", "1.0.3", "FASTD");
     }
 
     @Override

@@ -58,6 +58,6 @@ public abstract class WolfMixin {
 
 	@ModifyConstant(method = "updateShitState", constant = @Constant(intValue = 24000), remap = false)
 	private int modifyShitStateInterval(int original) {
-		return 4800;
+		return 9600;
 	}
 }

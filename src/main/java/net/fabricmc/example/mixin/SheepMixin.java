@@ -36,7 +36,7 @@ public abstract class SheepMixin extends EntitySheep {
 				chanceOfShitting *= 2;
 			}
 
-			if (worldObj.rand.nextInt(7200) < chanceOfShitting) {
+			if (worldObj.rand.nextInt(10800) < chanceOfShitting) {
 				attemptToShit();
 			}
 		}

@@ -28,7 +28,7 @@ public abstract class EntityAnimalMixin extends EntityLiving {
 				chanceOfShitting *= 2;
 			}
 
-			if (worldObj.rand.nextInt(4800) < chanceOfShitting) {
+			if (worldObj.rand.nextInt(12000) < chanceOfShitting) {
 				attemptToShit();
 			}
 		}

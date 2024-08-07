@@ -30,7 +30,7 @@ public abstract class ChickenMixin {
 	private void modifyOnEatBreedingItem(CallbackInfo ci) {
 		ChickenEntity chicken = (ChickenEntity) (Object) this;
 		long lCurrentTime = WorldUtils.getOverworldTimeServerOnly();
-		long timeToLayEgg = lCurrentTime + 1200L;
+		long timeToLayEgg = lCurrentTime + 6000L;
 		try {
 			Method getDeathSoundMethod = EntityChicken.class.getDeclaredMethod("getDeathSound");
 			getDeathSoundMethod.setAccessible(true);

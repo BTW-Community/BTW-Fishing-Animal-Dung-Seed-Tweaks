@@ -37,7 +37,7 @@ public abstract class CowMixin extends EntityCow {
 				chanceOfShitting *= 2;
 			}
 
-			if (worldObj.rand.nextInt(6000) < chanceOfShitting) {
+			if (worldObj.rand.nextInt(10800) < chanceOfShitting) {
 				attemptToShit();
 			}
 		}
