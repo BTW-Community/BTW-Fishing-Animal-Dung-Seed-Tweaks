@@ -1,6 +1,7 @@
 package net.fabricmc.example.mixin;
 
 
+import btw.community.example.FASTDAddon;
 import net.minecraft.src.EntityFishHook;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,6 +16,6 @@ public class FishHookMixin {
 			index = 1
 	)
 	private int modifyBiteOdds(int iBiteOdds) {
-		return 400;
+		return FASTDAddon.getFishTimer();
 	}
 }

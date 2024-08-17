@@ -30,7 +30,16 @@ public abstract class ChickenMixin {
 	private void modifyOnEatBreedingItem(CallbackInfo ci) {
 		ChickenEntity chicken = (ChickenEntity) (Object) this;
 		long lCurrentTime = WorldUtils.getOverworldTimeServerOnly();
-		long timeToLayEgg = lCurrentTime + 6000L;
+
+		// Calculate the current time of day
+		long timeOfDay = lCurrentTime % 24000L;
+
+		// Calculate the time for the next morning (0 ticks)
+		long nextMorningTime = (lCurrentTime - timeOfDay) + 24000L;
+
+		// Set timeToLayEgg to the next morning with a small random variance
+		long timeToLayEgg = nextMorningTime + (long)(1200 + chicken.rand.nextInt(600));
+
 		try {
 			Method getDeathSoundMethod = EntityChicken.class.getDeclaredMethod("getDeathSound");
 			getDeathSoundMethod.setAccessible(true);
@@ -45,6 +54,7 @@ public abstract class ChickenMixin {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		try {
 			Field timeToLayEggField = ChickenEntity.class.getDeclaredField("timeToLayEgg");
 			timeToLayEggField.setAccessible(true);
@@ -52,6 +62,7 @@ public abstract class ChickenMixin {
 		} catch (NoSuchFieldException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
+
 		ci.cancel();
 	}
 }

@@ -1,5 +1,6 @@
 package net.fabricmc.example.mixin;
 
+import btw.community.example.FASTDAddon;
 import btw.entity.mob.CowEntity;
 import btw.item.BTWItems;
 import net.minecraft.src.*;
@@ -37,7 +38,7 @@ public abstract class CowMixin extends EntityCow {
 				chanceOfShitting *= 2;
 			}
 
-			if (worldObj.rand.nextInt(10800) < chanceOfShitting) {
+			if (worldObj.rand.nextInt(FASTDAddon.getCowDungTime()) < chanceOfShitting) {
 				attemptToShit();
 			}
 		}

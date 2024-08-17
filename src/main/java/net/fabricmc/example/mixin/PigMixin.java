@@ -19,4 +19,10 @@ public class PigMixin {
 			cir.setReturnValue(true);
 		}
 	}
+	@Inject(method = "getItemFoodValue", at = @At("HEAD"), cancellable = true)
+	private void injectGetItemFoodValue(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+		if (stack.itemID == Item.fishRaw.itemID || stack.itemID == Item.fishCooked.itemID) {
+			cir.setReturnValue(6400);
+		}
+	}
 }

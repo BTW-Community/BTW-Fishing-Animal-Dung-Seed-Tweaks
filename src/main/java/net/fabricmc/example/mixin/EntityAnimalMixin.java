@@ -1,5 +1,6 @@
 package net.fabricmc.example.mixin;
 
+import btw.community.example.FASTDAddon;
 import btw.item.BTWItems;
 import net.minecraft.src.*;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,7 +29,7 @@ public abstract class EntityAnimalMixin extends EntityLiving {
 				chanceOfShitting *= 2;
 			}
 
-			if (worldObj.rand.nextInt(12000) < chanceOfShitting) {
+			if (worldObj.rand.nextInt(FASTDAddon.getPigDungTime()) < chanceOfShitting) {
 				attemptToShit();
 			}
 		}

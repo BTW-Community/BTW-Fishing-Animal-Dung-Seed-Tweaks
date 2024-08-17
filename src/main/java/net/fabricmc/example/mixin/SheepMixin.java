@@ -1,5 +1,6 @@
 package net.fabricmc.example.mixin;
 
+import btw.community.example.FASTDAddon;
 import btw.entity.mob.SheepEntity;
 import btw.item.BTWItems;
 import net.minecraft.src.*;
@@ -36,7 +37,7 @@ public abstract class SheepMixin extends EntitySheep {
 				chanceOfShitting *= 2;
 			}
 
-			if (worldObj.rand.nextInt(10800) < chanceOfShitting) {
+			if (worldObj.rand.nextInt(FASTDAddon.getSheepDungTime()) < chanceOfShitting) {
 				attemptToShit();
 			}
 		}

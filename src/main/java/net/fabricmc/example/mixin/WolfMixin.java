@@ -1,6 +1,7 @@
 package net.fabricmc.example.mixin;
 
 import btw.client.fx.BTWEffectManager;
+import btw.community.example.FASTDAddon;
 import btw.entity.mob.WolfEntity;
 import btw.item.BTWItems;
 import net.minecraft.src.*;
@@ -58,6 +59,6 @@ public abstract class WolfMixin {
 
 	@ModifyConstant(method = "updateShitState", constant = @Constant(intValue = 24000), remap = false)
 	private int modifyShitStateInterval(int original) {
-		return 9600;
+		return FASTDAddon.getWolfDungTime();
 	}
 }
