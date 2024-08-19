@@ -22,11 +22,11 @@ public class PigMixin {
 	@Inject(method = "getItemFoodValue", at = @At("HEAD"), cancellable = true)
 	private void injectGetItemFoodValue(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
 		if (stack.itemID == Item.fishRaw.itemID || stack.itemID == Item.fishCooked.itemID) {
-			cir.setReturnValue(12800);
+			cir.setReturnValue(6400);
 		}
 	}
 	@Inject(method = "getFoodValueMultiplier", at = @At("HEAD"), cancellable = true)
 	public void modifyFoodValueMultiplier(CallbackInfoReturnable<Integer> cir) {
-		cir.setReturnValue(16);
+		cir.setReturnValue(8);
 	}
 }
