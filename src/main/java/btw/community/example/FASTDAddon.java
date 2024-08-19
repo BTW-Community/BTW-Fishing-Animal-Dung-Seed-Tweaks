@@ -26,7 +26,7 @@ public class FASTDAddon extends BTWAddon {
         this.registerProperty("PigDungTime", "14400", "Average amount of ticks to produce dung");
         this.registerProperty("SheepDungTime", "14400", "Average amount of ticks to produce dung");
         this.registerProperty("WolfDungTime", "10800", "Average amount of ticks to produce dung");
-        this.registerProperty("FishTimer", "350", "Average amount of ticks to fish");
+        this.registerProperty("FishTimer", "300", "Average amount of ticks to fish");
         this.registerProperty("HempSeedChance", "16", "Chance to get hemp seeds");
         this.registerProperty("WheatSeedChance", "60", "Chance to get wheat seeds");
         Map<String, String> config = this.loadConfigProperties();

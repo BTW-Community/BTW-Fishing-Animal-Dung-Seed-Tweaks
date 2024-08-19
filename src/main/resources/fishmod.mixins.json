@@ -11,6 +11,7 @@
     "HempSeedMixin",
     "PigMixin",
     "SheepMixin",
+    "StrawItemMixin",
     "WolfMixin"
   ],
   "client": [
